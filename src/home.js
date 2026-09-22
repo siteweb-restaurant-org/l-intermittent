@@ -53,7 +53,7 @@ if (isReduced) {
   }
   setTimeout(buzz, 4500)
 
-  gsap.from('.hero__store', { scaleY: 0, duration: 1.1, ease: 'expo.out', delay: 0.1 })
+  gsap.from('.hdr__store', { scaleY: 0, duration: 1.1, ease: 'expo.out', delay: 0.1 })
   gsap.from('.hero__meta', { opacity: 0, y: 12, duration: 1, delay: 0.3, ease: 'expo.out' })
   gsap.from('.hero__lead, .hero__cta', { opacity: 0, y: 30, duration: 1.3, delay: 1.2, stagger: 0.12, ease: 'expo.out' })
   gsap.fromTo('.hero__main', { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.5, delay: 0.9, ease: 'expo.inOut' })

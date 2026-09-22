@@ -29,7 +29,8 @@ function onScroll() {
   if (!hdr) return
   hdr.classList.toggle('is-solid', alwaysSolid || y > window.innerHeight * 0.6)
   const menuOpen = document.body.classList.contains('menu-open')
-  hdr.classList.toggle('is-hidden', !menuOpen && y > 300 && y > lastY + 2)
+  const canHide = window.innerWidth > 860 // sur mobile il reste visible : des sections y sont collées
+  hdr.classList.toggle('is-hidden', canHide && !menuOpen && y > 300 && y > lastY + 2)
   if (y < lastY - 2 || y < 300) hdr.classList.remove('is-hidden')
   lastY = y
 }
@@ -74,6 +75,12 @@ function splitWords(el) {
         child.textContent.split(/(\s+)/).forEach((part) => {
           if (!part) return
           if (/^\s+$/.test(part)) return frag.append(' ')
+          // une ponctuation isolée reste collée au mot qui précède
+          const prev = frag.lastChild
+          if (/^[,.;:!?»)\]…]/.test(part) && prev && prev.nodeType === 1 && prev.classList.contains('ln')) {
+            prev.firstChild.textContent += part
+            return
+          }
           const ln = document.createElement('span')
           ln.className = 'ln'
           const w = document.createElement('span')

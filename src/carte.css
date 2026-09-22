@@ -2,11 +2,10 @@
 .chero {
   position: relative;
   background: var(--paper);
-  padding-top: calc(var(--header-h) + 60px);
+  padding-top: calc(var(--header-h) + var(--store-h) + 34px);
   padding-bottom: clamp(60px, 7vw, 100px);
   overflow: hidden;
 }
-.chero__store { position: absolute; top: var(--header-h); left: 0; right: 0; z-index: 2; }
 .chero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; min-height: min(78vh, 760px); }
 .chero__title { font-size: clamp(110px, 17vw, 280px); margin: 20px 0 30px; letter-spacing: 0.02em; }
 .chero__lead { font-size: clamp(22px, 2.1vw, 30px); line-height: 1.2; max-width: 28ch; font-weight: 500; }
@@ -51,7 +50,7 @@
   border-block: 1px solid var(--line);
   transition: top 0.6s var(--ease);
 }
-body:has(.hdr:not(.is-hidden)) .cnav { top: var(--header-h); }
+body:has(.hdr:not(.is-hidden)) .cnav { top: calc(var(--header-h) + var(--store-h)); }
 .cnav__inner { display: flex; gap: clamp(18px, 3vw, 44px); overflow-x: auto; scrollbar-width: none; }
 .cnav__inner::-webkit-scrollbar { display: none; }
 .cnav a {

@@ -7,11 +7,10 @@
     radial-gradient(60% 40% at 50% 26%, rgba(255, 255, 255, 0.05), transparent 70%),
     var(--ink);
   color: var(--cream);
-  padding-top: calc(var(--header-h) + 44px);
+  padding-top: calc(var(--header-h) + var(--store-h) + 26px);
   padding-bottom: 90px;
   overflow: hidden;
 }
-.hero__store { position: absolute; top: var(--header-h); left: 0; right: 0; z-index: 3; }
 .hero__meta { display: flex; justify-content: space-between; gap: 20px; padding-top: 34px; opacity: 0.7; }
 
 .hero__sign {
@@ -86,21 +85,23 @@ html:not(.js) .hero__sign { color: var(--cream); }
 
 /* ═════════════ LA MAISON ═════════════ */
 .maison { padding-block: clamp(90px, 12vw, 170px) clamp(70px, 9vw, 120px); position: relative; }
-.maison__intro { display: flex; align-items: center; gap: clamp(24px, 3vw, 54px); }
-.maison__stamp { flex-shrink: 0; }
+.maison__intro { position: relative; }
+.maison__stamp { position: absolute; right: 0; top: -14px; }
 @media (max-width: 860px) {
-  .maison__intro { flex-direction: column; align-items: flex-start; gap: 30px; }
-  .maison__stamp { width: 150px; height: 150px; margin-left: auto; }
-  .maison__stamp .stamp__big { font-size: 36px; }
-  .maison__stamp .stamp__top { font-size: 14px; }
-  .maison__stamp .stamp__bot { font-size: 12px; }
+  .maison__stamp { width: 86px; height: 86px; padding: 7px; right: -4px; top: -66px; }
+  .maison__stamp .stamp__big { font-size: 21px; }
+  .maison__stamp .stamp__top { font-size: 9px; letter-spacing: 0.1em; }
+  .maison__stamp .stamp__bot { font-size: 8px; }
 }
 .maison__text {
   font-size: clamp(34px, 4.9vw, 76px);
   line-height: 1.02;
   letter-spacing: -0.005em;
   font-weight: 500;
-  max-width: 22ch;
+  max-width: 26ch;
+  margin-inline: auto;
+  text-align: center;
+  text-wrap: balance;
   color: rgba(12, 12, 12, 0.55);
 }
 
@@ -222,7 +223,8 @@ html:not(.js) .hero__sign { color: var(--cream); }
 @media (max-width: 860px) {
   .day__grid { grid-template-columns: 1fr; }
   .day__sticky {
-    top: var(--header-h); z-index: 2; background: var(--bg);
+    top: calc(var(--header-h) + var(--store-h)); z-index: 2; background: var(--bg);
+    box-shadow: 0 -30px 0 var(--bg);
     padding-block: 12px 14px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
     display: grid; grid-template-columns: auto 1fr; align-items: end; column-gap: 16px;
   }

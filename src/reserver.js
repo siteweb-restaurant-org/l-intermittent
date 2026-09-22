@@ -230,6 +230,6 @@ else if (state.date && !state.couverts) go(1)
 if (!isReduced) {
   gsap.from('.resa__title', { y: 40, opacity: 0, duration: 1.2, ease: 'expo.out', delay: 0.2 })
   gsap.from('.ticket', { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', delay: 0.4 })
-  gsap.from('.resa__store', { scaleY: 0, duration: 1, ease: 'expo.out' })
+  gsap.from('.hdr__store', { scaleY: 0, duration: 1, ease: 'expo.out' })
   gsap.from('.panel:not([hidden]), .steps', { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: 0.3, stagger: 0.1 })
 }

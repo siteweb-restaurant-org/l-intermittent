@@ -88,7 +88,7 @@ if (!isReduced) {
   gsap.from('.table__tag', { opacity: 0, y: 20, duration: 1, delay: 1.1, ease: 'expo.out' })
   gsap.to('.table__plate img', { rotate: 50, ease: 'none', scrollTrigger: { trigger: '.chero', start: 'top top', end: 'bottom top', scrub: true } })
   gsap.to('.table', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.chero', start: 'top top', end: 'bottom top', scrub: true } })
-  gsap.from('.chero__store', { scaleY: 0, duration: 1.1, ease: 'expo.out' })
+  gsap.from('.hdr__store', { scaleY: 0, duration: 1.1, ease: 'expo.out' })
 }
 
 initReveals()
