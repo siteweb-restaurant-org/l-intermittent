@@ -68,8 +68,19 @@ body:has(.hdr:not(.is-hidden)) .cnav { top: var(--header-h); }
 .cnav a:hover { color: var(--ink); }
 
 /* ═════════ RUBRIQUES ═════════ */
-.mcat { padding-block: clamp(80px, 9vw, 140px); border-bottom: 1px solid var(--line); }
-.mcat:nth-child(even) { background: var(--cream); }
+.mcat { padding-block: clamp(80px, 9vw, 140px); background: var(--cream); }
+/* une rubrique sur deux passe en noir */
+.mcat:nth-child(even) {
+  background: var(--ink); color: var(--cream);
+  --line: var(--line-inv);
+  --muted: rgba(255, 255, 255, 0.55);
+  --em-stroke: var(--cream);
+}
+.mcat:nth-child(even) .mi:first-child { border-top-color: var(--cream); }
+.mcat:nth-child(even) .mi__dots { border-bottom-color: rgba(255, 255, 255, 0.4); }
+.mcat:nth-child(even) .mcat__hint i, .mcat:nth-child(even) .mi__cam { border-color: var(--cream); }
+.mcat:nth-child(even) .mi[data-img]:hover .mi__name, .mcat:nth-child(even) .mi.is-hot .mi__name { color: var(--brass-hi); }
+.mcat:nth-child(even) .mi::before { background: var(--cream); }
 .mcat__grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(30px, 6vw, 110px); }
 .mcat__side { position: sticky; top: calc(var(--header-h) + 90px); align-self: start; }
 .mcat__no { font-size: 14px; }
@@ -89,7 +100,7 @@ body:has(.hdr:not(.is-hidden)) .cnav { top: var(--header-h); }
 .mi:first-child { border-top: 1px solid var(--ink); }
 .mi__row { display: flex; align-items: baseline; gap: 14px; }
 .mi__name { font-family: var(--f-sign); font-size: clamp(23px, 2vw, 30px); line-height: 1.1; font-weight: 500; transition: color 0.3s; }
-.mi__dots { flex: 1; min-width: 20px; border-bottom: 1px dotted rgba(12, 12, 12, 0.35); transform: translateY(-6px); }
+.mi__dots { flex: 1; min-width: 20px; border-bottom: 1px dotted rgba(12, 12, 12, 0.32); transform: translateY(-6px); }
 .mi__price { font-family: var(--f-slab); font-size: clamp(19px, 1.6vw, 23px); white-space: nowrap; }
 .mi__desc { margin-top: 4px; color: var(--muted); font-size: 16px; }
 .mi__cam { margin-left: 10px; vertical-align: middle; transform: translateY(-3px); }

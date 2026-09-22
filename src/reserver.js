@@ -1,6 +1,7 @@
 import { gsap, isReduced, lenis } from './common.js'
 import './reserver.css'
 import { EVENTS, INFO } from './data.js'
+import { Calendar, iso, fromIso, eventOn } from './calendar.js'
 
 const $ = (s, r = document) => r.querySelector(s)
 const $$ = (s, r = document) => [...r.querySelectorAll(s)]
@@ -8,12 +9,9 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)]
 const state = { step: 1, couverts: null, date: null, heure: null, service: 'diner', place: 'Sans préférence', occasion: null }
 
 const pad2 = (n) => String(n).padStart(2, '0')
-const iso = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`
-const fromIso = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d) }
 const fmtDate = (s) => fromIso(s).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })
 const today = new Date(); today.setHours(0, 0, 0, 0)
 const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 5)
-const eventOn = (s) => EVENTS.find((e) => e.date === s)
 
 /* ═════════ Ticket récapitulatif ═════════ */
 const mRecap = document.createElement('p')
@@ -47,38 +45,18 @@ pax.addEventListener('click', (e) => {
 $$('#occasion input').forEach((r) => r.addEventListener('change', () => { state.occasion = r.value }))
 
 /* ═════════ 2 · calendrier ═════════ */
-let view = new Date(today.getFullYear(), today.getMonth(), 1)
-function renderCal() {
-  $('#calMonth').textContent = view.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
-  const first = (view.getDay() + 6) % 7 // lundi = 0
-  const days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate()
-  let html = '<span></span>'.repeat(first)
-  for (let d = 1; d <= days; d++) {
-    const dt = new Date(view.getFullYear(), view.getMonth(), d)
-    const s = iso(dt)
-    const ev = eventOn(s)
-    const off = dt < today || dt > maxDate
-    const cls = [s === iso(today) && 'is-today', ev && 'is-evt'].filter(Boolean).join(' ')
-    const label = dt.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) + (ev ? ` — ${ev.title}` : '')
-    html += `<button type="button" data-d="${s}" class="${cls}" ${off ? 'disabled' : ''} aria-pressed="${state.date === s}" aria-label="${label}">${d}</button>`
-  }
-  $('#calGrid').innerHTML = html
-  $('[data-m="-1"]').disabled = view <= new Date(today.getFullYear(), today.getMonth(), 1)
-  $('[data-m="1"]').disabled = view >= new Date(maxDate.getFullYear(), maxDate.getMonth(), 1)
-}
-$$('.cal__nav').forEach((b) => b.addEventListener('click', () => {
-  view = new Date(view.getFullYear(), view.getMonth() + +b.dataset.m, 1)
-  renderCal()
-  if (!isReduced) gsap.from('#calGrid button', { opacity: 0, y: 8, duration: 0.5, stagger: 0.006, ease: 'expo.out' })
-}))
-$('#calGrid').addEventListener('click', (e) => {
-  const b = e.target.closest('button[data-d]'); if (!b || b.disabled) return
-  state.date = b.dataset.d
-  state.heure = null
-  $$('#calGrid button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
-  showEvt()
-  update()
+const cal = new Calendar(document.getElementById('cal'), {
+  min: today,
+  max: maxDate,
+  onPick: (d) => {
+    state.date = d
+    state.heure = null
+    showEvt()
+    update()
+  },
 })
+cal.onMonth = () => { if (!isReduced) gsap.from('#cal .cal__grid button', { opacity: 0, y: 8, duration: 0.5, stagger: 0.006, ease: 'expo.out' }) }
+
 function showEvt() {
   const ev = state.date && eventOn(state.date)
   const n = $('#evtNote')
@@ -146,7 +124,6 @@ function go(n) {
   const nxt = $(`[data-panel="${n}"]`)
   const dir = n > state.step ? 1 : -1
   state.step = n
-  if (n === 2) renderCal()
   if (n === 3) renderSlots()
   const swap = () => {
     cur.hidden = true
@@ -242,10 +219,9 @@ if (qo) { const r = $(`#occasion input[value="${qo}"]`); if (r) { r.checked = tr
 if (qs && SERVICES[qs]) { state.service = qs; $(`#service input[value="${qs}"]`).checked = true }
 if (qd && /^\d{4}-\d{2}-\d{2}$/.test(qd) && fromIso(qd) >= today && fromIso(qd) <= maxDate) {
   state.date = qd
-  view = new Date(fromIso(qd).getFullYear(), fromIso(qd).getMonth(), 1)
+  cal.goTo(qd)
   showEvt()
 }
-renderCal()
 back.hidden = true
 update()
 if (state.couverts && state.date) go(3)

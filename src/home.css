@@ -38,7 +38,7 @@ html:not(.js) .hero__sign { color: var(--cream); }
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 5fr 7fr; gap: clamp(28px, 5vw, 80px);
   align-items: end;
-  margin-top: clamp(-70px, -4.5vw, -20px);
+  margin-top: clamp(18px, 2.4vw, 46px);
 }
 .hero__copy { padding-bottom: 12px; position: relative; z-index: 3; }
 .hero__lead { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.15; max-width: 22ch; font-weight: 500; color: rgba(255, 255, 255, 0.66); }
@@ -46,7 +46,7 @@ html:not(.js) .hero__sign { color: var(--cream); }
 .maison__text em { color: var(--ink); }
 .hero__cta { display: flex; align-items: center; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
 
-.hero__photo { position: relative; margin: 0; padding-top: clamp(30px, 4vw, 70px); }
+.hero__photo { position: relative; margin: 0; }
 .hero__main { aspect-ratio: 16 / 9.6; }
 .hero__main img { height: 124%; margin-top: -12%; filter: saturate(0.9) contrast(1.05); }
 .hero__main::after {
@@ -86,7 +86,7 @@ html:not(.js) .hero__sign { color: var(--cream); }
 
 /* ═════════════ LA MAISON ═════════════ */
 .maison { padding-block: clamp(90px, 12vw, 170px) clamp(70px, 9vw, 120px); position: relative; }
-.maison__intro { display: flex; align-items: center; gap: clamp(30px, 6vw, 100px); }
+.maison__intro { display: flex; align-items: center; gap: clamp(24px, 3vw, 54px); }
 .maison__stamp { flex-shrink: 0; }
 @media (max-width: 860px) {
   .maison__intro { flex-direction: column; align-items: flex-start; gap: 30px; }

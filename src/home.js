@@ -2,6 +2,7 @@ import { gsap, ScrollTrigger, initReveals, initParallax, isReduced } from './com
 import './home.css'
 import { SIGNATURES, EVENTS, euro } from './data.js'
 import { fishPlate } from './fish.js'
+import { Calendar, iso as isoDate } from './calendar.js'
 
 /* ═════════ Enseigne : lettres qui s'allument ═════════ */
 const sign = document.querySelector('.hero__sign')
@@ -228,10 +229,46 @@ form.querySelectorAll('[data-step]').forEach((b) =>
   }),
 )
 const today = new Date()
-const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-const qDate = document.getElementById('qDate')
-qDate.min = iso(today)
-qDate.value = iso(today)
+today.setHours(0, 0, 0, 0)
+const maxDate = new Date(today)
+maxDate.setMonth(maxDate.getMonth() + 5)
+const hiddenDate = document.getElementById('qDate')
+const dateTxt = document.getElementById('qDateTxt')
+const dateBtn = document.getElementById('qDateBtn')
+const pop = document.getElementById('qCalPop')
+
+const dateLabel = (d) => {
+  const dt = new Date(d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10))
+  if (d === isoDate(today)) return "Aujourd'hui"
+  const t = new Date(today); t.setDate(t.getDate() + 1)
+  if (d === isoDate(t)) return 'Demain'
+  return dt.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
+}
+const setDate = (d) => {
+  hiddenDate.value = d
+  dateTxt.textContent = dateLabel(d)
+}
+setDate(isoDate(today))
+
+const qcal = new Calendar(document.getElementById('qCal'), {
+  min: today, max: maxDate, value: hiddenDate.value, legend: false,
+  onPick: (d) => { setDate(d); closePop() },
+})
+
+function openPop() {
+  pop.hidden = false
+  dateBtn.setAttribute('aria-expanded', 'true')
+  if (!isReduced) gsap.fromTo(pop, { opacity: 0, y: -8, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'expo.out' })
+}
+function closePop() {
+  if (pop.hidden) return
+  dateBtn.setAttribute('aria-expanded', 'false')
+  if (isReduced) return (pop.hidden = true)
+  gsap.to(pop, { opacity: 0, y: -6, duration: 0.2, onComplete: () => (pop.hidden = true) })
+}
+dateBtn.addEventListener('click', () => (pop.hidden ? openPop() : closePop()))
+document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target) && e.target !== dateBtn && !dateBtn.contains(e.target)) closePop() })
+document.addEventListener('keydown', (e) => e.key === 'Escape' && closePop())
 
 initReveals()
 initParallax()

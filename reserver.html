@@ -59,16 +59,7 @@
         <!-- 2 · date -->
         <fieldset class="panel" data-panel="2" hidden>
           <legend class="panel__q serif">Quel jour ?</legend>
-          <div class="cal" id="cal">
-            <div class="cal__head">
-              <button type="button" class="cal__nav" data-m="-1" aria-label="Mois précédent">←</button>
-              <span class="cal__month sign" id="calMonth"></span>
-              <button type="button" class="cal__nav" data-m="1" aria-label="Mois suivant">→</button>
-            </div>
-            <div class="cal__dow"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
-            <div class="cal__grid" id="calGrid" role="grid"></div>
-            <p class="cal__legend"><i></i> Soirée ou match à l'affiche</p>
-          </div>
+          <div id="cal"></div>
           <div class="evt-note" id="evtNote" hidden></div>
         </fieldset>
 

@@ -216,10 +216,12 @@
               <input type="hidden" name="couverts" value="2">
             </div>
 
-            <label class="qfield">
+            <div class="qfield qfield--date">
               <span class="qfield__lbl kicker">Date</span>
-              <input type="date" name="date" id="qDate" required>
-            </label>
+              <button type="button" class="qdate" id="qDateBtn" aria-haspopup="dialog" aria-expanded="false"><span id="qDateTxt">Ce soir</span></button>
+              <input type="hidden" name="date" id="qDate">
+              <div class="calpop" id="qCalPop" hidden><div id="qCal"></div></div>
+            </div>
 
             <div class="qfield">
               <span class="qfield__lbl kicker">Service</span>
