@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- @include head -->
+  <title>La carte — L'Intermittent, Boulogne-Billancourt</title>
+  <meta name="description" content="La carte de L'Intermittent : entrées, viandes, poissons, desserts faits maison et carte des vins. Brasserie à Boulogne-Billancourt.">
+  <script type="module" src="/src/carte.js"></script>
+</head>
+<body data-page="carte" data-hdr="solid">
+  <!-- @include header -->
+
+  <main>
+    <section class="chero">
+      <div class="store chero__store"></div>
+      <div class="wrap chero__grid">
+        <div class="chero__copy">
+          <span class="kicker">Midi &amp; soir · tous les jours</span>
+          <h1 class="chero__title sign rv-line">La carte</h1>
+          <p class="chero__lead serif rv">Une cuisine de brasserie faite maison, des produits qui changent avec les saisons, et des frites maison, évidemment.</p>
+          <p class="chero__note rv">Prix nets, service compris.</p>
+        </div>
+        <div class="table" aria-hidden="true">
+          <div class="table__top">
+            <div class="table__plate"><img src="/img/poulpe-marbre.jpg" alt=""></div>
+          </div>
+          <span class="table__tag serif it">Suggestion du moment — le poulpe</span>
+        </div>
+      </div>
+    </section>
+
+    <nav class="cnav" aria-label="Rubriques de la carte">
+      <div class="wrap cnav__inner" id="cnav"></div>
+    </nav>
+
+    <div id="menu"></div>
+
+    <section class="wines" id="vins">
+      <div class="wrap">
+        <div class="wines__head">
+          <div>
+            <span class="kicker">La cave</span>
+            <h2 class="h-section rv-line">Vins &amp; <em>champagnes</em></h2>
+          </div>
+          <div class="wines__photos">
+            <div class="frame rv-img"><img src="/img/vins.jpg" alt="Deux bouteilles de rouge sur une table" loading="lazy"></div>
+            <div class="frame rv-img" data-delay=".15"><img src="/img/vin-rouge.jpg" alt="Une bouteille de Pic Saint-Loup" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="wines__grid" id="wines"></div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap cta-band__inner">
+        <p class="serif rv-line">Une envie ? <em>La table est mise.</em></p>
+        <a href="/reserver.html" class="btn btn--light rv">Réserver une table <span class="arr">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+</body>
+</html>

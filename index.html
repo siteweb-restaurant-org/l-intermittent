@@ -1,13 +1,236 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>L'Intermittent — Boulogne-Billancourt</title>
-  <style>
-    html,body{height:100%;margin:0}
-    body{display:grid;place-items:center;background:#0e0e0d;color:#f4efe6;font-family:Georgia,serif;letter-spacing:.3em;text-transform:uppercase;font-size:14px}
-  </style>
+  <!-- @include head -->
+  <title>L'Intermittent — Brasserie à Boulogne-Billancourt</title>
+  <meta name="description" content="Brasserie parisienne à Boulogne-Billancourt depuis 2009 : cuisine maison, terrasse, soirées match sur grand écran. Ouvert tous les jours de 8h à minuit.">
+  <script type="module" src="/src/home.js"></script>
 </head>
-<body>L'Intermittent · bientôt</body>
+<body data-page="home">
+  <!-- @include header -->
+
+  <main>
+    <!-- ─────────── HERO ─────────── -->
+    <section class="hero" data-parallax-root>
+      <div class="store hero__store"></div>
+      <div class="wrap hero__meta">
+        <span class="kicker">Brasserie · Bar · Terrasse</span>
+        <span class="kicker">Boulogne-Billancourt — depuis 2009</span>
+      </div>
+
+      <h1 class="hero__sign sign" aria-label="L'Intermittent">L'Intermittent</h1>
+
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="hero__lead serif">La brasserie de l'avenue Jean-Baptiste Clément. Nappes blanches, terrasse sous le store, <em class="it">et grand écran les soirs de match.</em></p>
+          <div class="hero__cta">
+            <a href="/reserver.html" class="btn btn--light">Réserver une table <span class="arr">→</span></a>
+            <a href="/carte.html" class="link-u kicker">Voir la carte</a>
+          </div>
+        </div>
+        <figure class="hero__photo">
+          <div class="frame hero__main"><img src="/img/facade-nuit.jpg" alt="La façade de L'Intermittent le soir, enseigne allumée" data-speed="-0.12"></div>
+          <div class="frame hero__small"><img src="/img/cocktail-nuit.jpg" alt="Cocktail au comptoir"></div>
+          <figcaption class="cap"><span class="serif">Le soir, avenue J.-B. Clément</span><span>N° 87</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="hero__scroll kicker" aria-hidden="true"><span>Défiler</span><i></i></div>
+    </section>
+
+    <!-- ─────────── LA MAISON ─────────── -->
+    <section class="maison" id="maison" data-parallax-root>
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="kicker">01 — La maison</span>
+          <span class="sec-head__rule"></span>
+        </div>
+
+        <p class="maison__text serif rv-line">Depuis 2009, on sert ici une cuisine de brasserie <em>faite maison</em>, du premier café au dernier verre. Clément et son équipe vous reçoivent comme des habitués.</p>
+
+        <div class="maison__collage">
+          <figure class="mc mc--a">
+            <div class="frame rv-img"><img src="/img/facade-jour.jpg" alt="La terrasse et ses nappes blanches sous le store noir" loading="lazy"></div>
+            <figcaption class="cap"><span class="serif">La terrasse, midi</span><span>I</span></figcaption>
+          </figure>
+          <figure class="mc mc--b" data-speed="-0.18">
+            <div class="frame rv-img" data-delay=".15"><img src="/img/patron-bar.jpg" alt="Au comptoir du bar" loading="lazy"></div>
+            <figcaption class="cap"><span class="serif">Au comptoir</span><span>II</span></figcaption>
+          </figure>
+          <figure class="mc mc--c" data-speed="0.14">
+            <div class="frame rv-img" data-delay=".3"><img src="/img/terrasse-tablee.jpg" alt="Une grande tablée en terrasse" loading="lazy"></div>
+            <figcaption class="cap"><span class="serif">Les tablées du dimanche</span><span>III</span></figcaption>
+          </figure>
+          <blockquote class="mc mc--q serif rv">
+            « Une maison où l'on vient pour déjeuner, et où l'on reste pour le café. »
+          </blockquote>
+        </div>
+
+        <ul class="facts">
+          <li class="rv"><span class="facts__big sign">8h—00h</span><span class="facts__lbl">Ouvert tous les jours</span></li>
+          <li class="rv" data-delay=".08"><span class="facts__big num">9,3<small>/10</small></span><span class="facts__lbl">722 avis sur TheFork</span></li>
+          <li class="rv" data-delay=".16"><span class="facts__big sign">Grand écran</span><span class="facts__lbl">Tous les matchs en direct</span></li>
+          <li class="rv" data-delay=".24"><span class="facts__big num">Frites</span><span class="facts__lbl">Maison, évidemment</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─────────── SIGNATURES ─────────── -->
+    <section class="sig" id="carte">
+      <div class="sig__pin">
+        <div class="wrap sig__head">
+          <div>
+            <span class="kicker">02 — À la carte</span>
+            <h2 class="h-section rv-line">Les <em>classiques</em><br>de la maison</h2>
+          </div>
+          <a href="/carte.html" class="btn btn--ghost sig__all">Toute la carte <span class="arr">→</span></a>
+        </div>
+        <div class="sig__viewport">
+          <ol class="sig__track" id="sigTrack"></ol>
+        </div>
+        <div class="wrap sig__foot">
+          <span class="kicker">Glissez</span>
+          <span class="sig__progress"><i id="sigBar"></i></span>
+          <span class="kicker"><span id="sigCount">01</span> / 10</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── UNE JOURNÉE ─────────── -->
+    <section class="day" id="journee">
+      <div class="wrap day__grid">
+        <div class="day__sticky">
+          <span class="kicker">03 — Une journée à L'Intermittent</span>
+          <div class="day__clock sign" aria-live="polite"><span id="dayClock">08:00</span></div>
+          <p class="day__label serif it" id="dayLabel">Le premier café</p>
+          <div class="day__sun" aria-hidden="true"><i id="daySun"></i></div>
+        </div>
+        <div class="day__panels">
+          <article class="dp" data-time="08:00" data-label="Le premier café" data-bg="#f3ede2" data-fg="#121110">
+            <div class="frame rv-img"><img src="/img/terrasse-vue.jpg" alt="La terrasse le matin, vue sur l'avenue" loading="lazy"></div>
+            <p class="serif">Café serré, croissant, le journal en terrasse avant de filer au bureau.</p>
+          </article>
+          <article class="dp" data-time="12:30" data-label="Le déjeuner" data-bg="#efe4d0" data-fg="#121110">
+            <div class="frame rv-img"><img src="/img/salle-velours.jpg" alt="Tables dressées, nappes blanches et fauteuils de velours" loading="lazy"></div>
+            <p class="serif">Les habitués du quartier, les bureaux d'à côté, une assiette qui tient au corps.</p>
+          </article>
+          <article class="dp" data-time="18:30" data-label="L'apéritif" data-bg="#e5cfae" data-fg="#121110">
+            <div class="frame rv-img"><img src="/img/cocktail-rose.jpg" alt="Cocktail rose en terrasse" loading="lazy"></div>
+            <p class="serif">Un spritz, une planche à partager, le soleil qui descend sur l'avenue.</p>
+          </article>
+          <article class="dp" data-time="20:30" data-label="Le dîner" data-bg="#2a2520" data-fg="#fbf8f2">
+            <div class="frame rv-img"><img src="/img/salle-orange.jpg" alt="La salle le soir, fauteuils cognac" loading="lazy"></div>
+            <p class="serif">Côte de bœuf pour deux, une bouteille de Saint-Amour, on ne regarde plus l'heure.</p>
+          </article>
+          <article class="dp" data-time="23:30" data-label="Le dernier verre" data-bg="#121110" data-fg="#fbf8f2">
+            <div class="frame rv-img"><img src="/img/moscow-mule.jpg" alt="Moscow mule en tasse de cuivre, le soir" loading="lazy"></div>
+            <p class="serif">Un moscow mule en tasse de cuivre, les guirlandes allumées. On ferme à minuit, promis.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── SOIRÉES ─────────── -->
+    <section class="soirees" id="soirees">
+      <div class="wrap">
+        <div class="soirees__head">
+          <div>
+            <span class="kicker">04 — Les soirées</span>
+            <h2 class="h-section rv-line">Les grands matchs,<br><em>en grand.</em></h2>
+          </div>
+          <p class="soirees__intro serif rv">Ligue des Champions, les Bleus, le XV de France : tout passe sur grand écran, avec l'ambiance qui va avec. Et quand il n'y a pas de match, il y a le Beaujolais.</p>
+        </div>
+
+        <div class="board rv" id="board" role="table" aria-label="Prochains rendez-vous">
+          <div class="board__top">
+            <span class="kicker">Prochains rendez-vous</span>
+            <span class="board__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="kicker">Réservation conseillée</span>
+          </div>
+          <div class="board__cols kicker" role="row" aria-hidden="true"><span>Date</span><span>Événement</span><span>Heure</span></div>
+          <div id="boardRows"></div>
+        </div>
+
+        <ul class="soirees__perks">
+          <li><span class="sign">Écran géant</span>diffusion en direct</li>
+          <li><span class="sign">100 % supporters</span>ambiance garantie</li>
+          <li><span class="sign">Tout le calendrier</span>des Bleus et du PSG</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─────────── AVIS + RÉSA RAPIDE ─────────── -->
+    <section class="book" id="reserver">
+      <div class="wrap book__grid">
+        <div class="book__score">
+          <span class="kicker">05 — Ils en parlent</span>
+          <div class="score num rv"><span id="scoreNum">9,3</span><small>/10</small></div>
+          <div class="score__bar rv" aria-hidden="true"><i></i></div>
+          <p class="score__txt rv">Note moyenne sur TheFork, sur 722 avis de clients.</p>
+          <div class="book__photos">
+            <div class="frame rv-img"><img src="/img/champagne.jpg" alt="Deux coupes qui trinquent en terrasse" loading="lazy"></div>
+            <div class="frame rv-img" data-delay=".15"><img src="/img/huitres.jpg" alt="Huîtres et citron" loading="lazy"></div>
+          </div>
+        </div>
+
+        <form class="qbook rv" id="qbook" action="/reserver.html">
+          <div class="store" data-unroll></div>
+          <div class="qbook__body">
+            <span class="kicker">Réservation</span>
+            <h3 class="qbook__title serif">Une table <em class="it">ce soir</em> ?</h3>
+
+            <div class="qfield">
+              <span class="qfield__lbl kicker">Couverts</span>
+              <div class="stepper">
+                <button type="button" data-step="-1" aria-label="Moins">−</button>
+                <output id="qCouverts" class="num">2</output>
+                <button type="button" data-step="1" aria-label="Plus">+</button>
+              </div>
+              <input type="hidden" name="couverts" value="2">
+            </div>
+
+            <label class="qfield">
+              <span class="qfield__lbl kicker">Date</span>
+              <input type="date" name="date" id="qDate" required>
+            </label>
+
+            <div class="qfield">
+              <span class="qfield__lbl kicker">Service</span>
+              <div class="seg">
+                <label><input type="radio" name="service" value="dejeuner"><span>Déjeuner</span></label>
+                <label><input type="radio" name="service" value="diner" checked><span>Dîner</span></label>
+              </div>
+            </div>
+
+            <button class="btn qbook__go" type="submit">Choisir un horaire <span class="arr">→</span></button>
+            <p class="qbook__alt">Plus de 8 personnes ? <a class="link-u" href="tel:+33146045550">01 46 04 55 50</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ─────────── INFOS ─────────── -->
+    <section class="infos" id="infos">
+      <div class="wrap infos__grid">
+        <div>
+          <span class="kicker">06 — Nous trouver</span>
+          <h2 class="h-section rv-line">87, avenue<br><em>Jean-Baptiste Clément</em></h2>
+          <dl class="infos__list">
+            <div class="rv"><dt class="kicker">Adresse</dt><dd>87 avenue Jean-Baptiste Clément<br>92100 Boulogne-Billancourt</dd></div>
+            <div class="rv"><dt class="kicker">Horaires</dt><dd>Tous les jours, de 8h à minuit<br><span class="open-dot"><i></i><span>Ouvert</span></span></dd></div>
+            <div class="rv"><dt class="kicker">Téléphone</dt><dd><a class="link-u" href="tel:+33146045550">01 46 04 55 50</a></dd></div>
+            <div class="rv"><dt class="kicker">Sur place</dt><dd>Terrasse, salle, bar · Wi-Fi · Chiens bienvenus</dd></div>
+          </dl>
+        </div>
+        <div class="infos__map rv-img">
+          <iframe title="Plan d'accès à L'Intermittent" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=L%27Intermittent%2C%2087%20avenue%20Jean-Baptiste%20Cl%C3%A9ment%2C%2092100%20Boulogne-Billancourt&z=16&output=embed"></iframe>
+          <div class="infos__pin" aria-hidden="true"><span class="sign">L'Intermittent</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+</body>
 </html>

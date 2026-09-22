@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- @include head -->
+  <title>Réserver une table — L'Intermittent, Boulogne-Billancourt</title>
+  <meta name="description" content="Réservez votre table à L'Intermittent, brasserie à Boulogne-Billancourt. Déjeuner, dîner, soirées match.">
+  <script type="module" src="/src/reserver.js"></script>
+</head>
+<body data-page="reserver" data-hdr="solid">
+  <!-- @include header -->
+
+  <main class="resa">
+    <aside class="resa__aside">
+      <div class="resa__photo"><img src="/img/facade-jour.jpg" alt="La terrasse de L'Intermittent sous le store"></div>
+      <div class="store resa__store"></div>
+      <div class="resa__asideIn">
+        <span class="kicker">Réservation en ligne</span>
+        <h1 class="resa__title sign">Réserver<br>une table</h1>
+
+        <div class="ticket" id="ticket" aria-live="polite">
+          <div class="ticket__row"><span class="kicker">Couverts</span><span class="ticket__val" data-t="couverts">—</span></div>
+          <div class="ticket__row"><span class="kicker">Date</span><span class="ticket__val" data-t="date">—</span></div>
+          <div class="ticket__row"><span class="kicker">Heure</span><span class="ticket__val" data-t="heure">—</span></div>
+          <div class="ticket__row"><span class="kicker">Table</span><span class="ticket__val" data-t="place">—</span></div>
+        </div>
+
+        <p class="resa__help">Un souci, un groupe ? <a class="link-u" href="tel:+33146045550">01 46 04 55 50</a></p>
+      </div>
+    </aside>
+
+    <section class="resa__main">
+      <ol class="steps" id="steps">
+        <li data-s="1"><button type="button"><span class="steps__n">1</span><span class="steps__l">Couverts</span></button></li>
+        <li data-s="2"><button type="button"><span class="steps__n">2</span><span class="steps__l">Date</span></button></li>
+        <li data-s="3"><button type="button"><span class="steps__n">3</span><span class="steps__l">Horaire</span></button></li>
+        <li data-s="4"><button type="button"><span class="steps__n">4</span><span class="steps__l">Coordonnées</span></button></li>
+      </ol>
+      <div class="steps__bar"><i id="stepsBar"></i></div>
+
+      <form id="resaForm" novalidate>
+        <!-- 1 · couverts -->
+        <fieldset class="panel" data-panel="1">
+          <legend class="panel__q serif">Combien serez-vous ?</legend>
+          <div class="pax" id="pax"></div>
+          <p class="panel__aside">Plus de 8 convives ? Appelez-nous au <a class="link-u" href="tel:+33146045550">01 46 04 55 50</a>, on s'occupe de tout.</p>
+
+          <p class="panel__sub kicker">L'occasion <span>(facultatif)</span></p>
+          <div class="chips" id="occasion">
+            <label><input type="radio" name="occasion" value="repas"><span>Un bon repas</span></label>
+            <label><input type="radio" name="occasion" value="match"><span>Soirée match</span></label>
+            <label><input type="radio" name="occasion" value="anniversaire"><span>Anniversaire</span></label>
+            <label><input type="radio" name="occasion" value="affaires"><span>Repas d'affaires</span></label>
+            <label><input type="radio" name="occasion" value="amoureux"><span>En amoureux</span></label>
+            <label><input type="radio" name="occasion" value="soiree"><span>Soirée spéciale</span></label>
+          </div>
+        </fieldset>
+
+        <!-- 2 · date -->
+        <fieldset class="panel" data-panel="2" hidden>
+          <legend class="panel__q serif">Quel jour ?</legend>
+          <div class="cal" id="cal">
+            <div class="cal__head">
+              <button type="button" class="cal__nav" data-m="-1" aria-label="Mois précédent">←</button>
+              <span class="cal__month sign" id="calMonth"></span>
+              <button type="button" class="cal__nav" data-m="1" aria-label="Mois suivant">→</button>
+            </div>
+            <div class="cal__dow"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+            <div class="cal__grid" id="calGrid" role="grid"></div>
+            <p class="cal__legend"><i></i> Soirée ou match à l'affiche</p>
+          </div>
+          <div class="evt-note" id="evtNote" hidden></div>
+        </fieldset>
+
+        <!-- 3 · horaire -->
+        <fieldset class="panel" data-panel="3" hidden>
+          <legend class="panel__q serif">À quelle heure ?</legend>
+          <div class="seg seg--lg" id="service">
+            <label><input type="radio" name="service" value="dejeuner"><span>Déjeuner <small>12h — 14h30</small></span></label>
+            <label><input type="radio" name="service" value="diner" checked><span>Dîner <small>19h — 22h45</small></span></label>
+          </div>
+          <div class="slots" id="slots"></div>
+          <p class="slots__empty" id="slotsEmpty" hidden>Plus de créneau pour ce service aujourd'hui. Essayez le dîner ou un autre jour.</p>
+
+          <p class="panel__sub kicker">Placement</p>
+          <div class="chips" id="place">
+            <label><input type="radio" name="place" value="Salle"><span>En salle</span></label>
+            <label><input type="radio" name="place" value="Terrasse"><span>En terrasse</span></label>
+            <label><input type="radio" name="place" value="Sans préférence" checked><span>Sans préférence</span></label>
+          </div>
+        </fieldset>
+
+        <!-- 4 · coordonnées -->
+        <fieldset class="panel" data-panel="4" hidden>
+          <legend class="panel__q serif">À quel nom ?</legend>
+          <div class="fields">
+            <label class="f"><input name="prenom" autocomplete="given-name" required placeholder=" "><span>Prénom</span></label>
+            <label class="f"><input name="nom" autocomplete="family-name" required placeholder=" "><span>Nom</span></label>
+            <label class="f"><input name="tel" type="tel" autocomplete="tel" required placeholder=" " pattern="[0-9 +().-]{8,}"><span>Téléphone</span></label>
+            <label class="f"><input name="email" type="email" autocomplete="email" required placeholder=" "><span>E-mail</span></label>
+            <label class="f f--full"><textarea name="note" rows="3" placeholder=" "></textarea><span>Une précision ? Allergie, chaise haute, gâteau…</span></label>
+          </div>
+          <label class="check"><input type="checkbox" name="news"><span>Me prévenir des prochaines soirées match et événements</span></label>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" id="back">← Retour</button>
+          <button type="button" class="btn" id="next">Continuer <span class="arr">→</span></button>
+        </div>
+      </form>
+
+      <!-- confirmation -->
+      <div class="done" id="done" hidden>
+        <div class="done__card">
+          <div class="store"></div>
+          <div class="done__body">
+            <span class="kicker">Réservation confirmée</span>
+            <h2 class="done__title serif">Merci, <em id="dName"></em>.<br>Votre table vous attend.</h2>
+            <dl class="done__grid" id="dGrid"></dl>
+            <div class="done__code"><span class="kicker">N° de réservation</span><span class="sign" id="dCode"></span></div>
+            <div class="done__actions">
+              <button type="button" class="btn" id="ics">Ajouter à mon agenda <span class="arr">↓</span></button>
+              <a href="/" class="btn btn--ghost">Retour à l'accueil</a>
+            </div>
+          </div>
+          <div class="damier"></div>
+        </div>
+        <p class="done__demo">Maquette de démonstration : aucune réservation n'a été transmise au restaurant.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+</body>
+</html>

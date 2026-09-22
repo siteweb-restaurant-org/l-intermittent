@@ -1,0 +1,305 @@
+/* ─────────────────────────────────────────────
+   L'Intermittent — brasserie, Boulogne-Billancourt
+   Palette tirée du lieu : store noir, nappes blanches,
+   laiton des guéridons, rouge du bar.
+   ───────────────────────────────────────────── */
+
+:root {
+  --ink: #121110;
+  --ink-2: #1a1917;
+  --ink-3: #26241f;
+  --paper: #f3ede2;
+  --paper-2: #e9e1d2;
+  --cream: #fbf8f2;
+  --brass: #a9854a;
+  --brass-hi: #d6b67c;
+  --rouge: #a3302a;
+  --muted: #857e72;
+  --line: rgba(18, 17, 16, 0.14);
+  --line-inv: rgba(251, 248, 242, 0.16);
+
+  --f-sign: 'Archivo', 'Arial Narrow', sans-serif;
+  --f-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --f-text: 'Archivo', system-ui, sans-serif;
+
+  --gutter: clamp(18px, 4vw, 56px);
+  --maxw: 1440px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-h: 76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-variation-settings: 'wdth' 100;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+[hidden] { display: none !important; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+::selection { background: var(--ink); color: var(--cream); }
+
+/* grain argentique, très léger */
+body::after {
+  content: '';
+  position: fixed; inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(4) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+}
+
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); }
+
+/* ── typographie ─────────────────────────── */
+.sign {
+  font-family: var(--f-sign);
+  font-variation-settings: 'wdth' 62;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 0.86;
+}
+.serif { font-family: var(--f-serif); font-weight: 400; }
+.it { font-style: italic; }
+.kicker {
+  font-family: var(--f-text);
+  font-variation-settings: 'wdth' 88;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.num {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-feature-settings: 'lnum';
+}
+h1, h2, h3 { margin: 0; font-weight: inherit; }
+p { margin: 0; }
+
+.h-section {
+  font-family: var(--f-serif);
+  font-weight: 350;
+  font-size: clamp(40px, 6.4vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.h-section em { font-style: italic; color: var(--brass); }
+
+/* ── le store : rayures noir/crème + festons ── */
+.store {
+  --stripe: 30px;
+  --drop: 15px;
+  position: relative;
+  height: 44px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 var(--stripe), var(--cream) var(--stripe) calc(var(--stripe) * 2));
+  -webkit-mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--drop)) no-repeat,
+    radial-gradient(circle var(--drop) at 50% 0, #000 97%, transparent 100%) left bottom / var(--stripe) var(--drop) repeat-x;
+          mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--drop)) no-repeat,
+    radial-gradient(circle var(--drop) at 50% 0, #000 97%, transparent 100%) left bottom / var(--stripe) var(--drop) repeat-x;
+  transform-origin: top;
+}
+/* ombre du tissu : pli en haut, creux entre les lés */
+.store::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.38) 0, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.12) 80%, rgba(0, 0, 0, 0.3) 100%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px calc(var(--stripe)));
+}
+.store--thin { height: 30px; --stripe: 22px; --drop: 11px; }
+
+/* damier des chaises bistrot */
+.damier {
+  --s: 12px;
+  height: calc(var(--s) * 2);
+  background:
+    conic-gradient(var(--ink) 25%, var(--cream) 0 50%, var(--ink) 0 75%, var(--cream) 0) 0 0 / calc(var(--s) * 2) calc(var(--s) * 2);
+}
+
+/* ── boutons ─────────────────────────────── */
+.btn {
+  --bg: var(--ink); --fg: var(--cream);
+  position: relative;
+  display: inline-flex; align-items: center; gap: 14px;
+  height: 54px; padding: 0 26px;
+  background: var(--bg); color: var(--fg);
+  font-variation-settings: 'wdth' 88;
+  font-size: 12.5px; font-weight: 650; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.5s var(--ease);
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--brass);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.5s var(--ease);
+}
+.btn:hover::before, .btn:focus-visible::before { transform: scaleY(1); }
+.btn .arr { display: inline-block; transition: transform 0.5s var(--ease); }
+.btn:hover .arr { transform: translateX(5px); }
+.btn--light { --bg: var(--cream); --fg: var(--ink); }
+.btn--light:hover { color: var(--cream); }
+.btn--ghost { --bg: transparent; --fg: currentColor; box-shadow: inset 0 0 0 1px currentColor; }
+.btn--ghost:hover { color: var(--cream); }
+.btn--brass { --bg: var(--brass); --fg: var(--cream); }
+.btn--brass::before { background: var(--ink); }
+
+.link-u {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  padding-bottom: 3px;
+  transition: background-size 0.5s var(--ease);
+}
+.link-u:hover { background-size: 0 1px; background-position: 100% 100%; }
+
+/* ── en-tête ─────────────────────────────── */
+.hdr {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  color: var(--cream);
+  transition: transform 0.6s var(--ease), background-color 0.4s;
+}
+.hdr__bar {
+  height: var(--header-h);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.hdr.is-solid { background: var(--ink); }
+.hdr.is-hidden { transform: translateY(-100%); }
+.brand { display: flex; flex-direction: column; line-height: 1; }
+.brand__name { font-size: 27px; letter-spacing: 0.07em; }
+.brand__sub {
+  margin-top: 5px;
+  font-size: 8.5px; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase;
+  font-variation-settings: 'wdth' 90;
+  opacity: 0.72;
+}
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 40px); }
+.nav a:not(.btn) {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  font-variation-settings: 'wdth' 88;
+  position: relative; padding: 6px 0;
+}
+.nav a:not(.btn)::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right; transition: transform 0.5s var(--ease);
+}
+.nav a:not(.btn):hover::after, .nav a[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+.nav .btn { height: 44px; padding: 0 20px; }
+.hdr .btn--light:not(:hover) { color: var(--ink); }
+.open-dot {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  font-variation-settings: 'wdth' 88;
+  opacity: 0.85;
+}
+.open-dot i { width: 7px; height: 7px; border-radius: 50%; background: #6fbf73; box-shadow: 0 0 0 4px rgba(111, 191, 115, 0.2); }
+.open-dot.is-closed i { background: var(--rouge); box-shadow: 0 0 0 4px rgba(163, 48, 42, 0.25); }
+
+.burger { display: none; width: 44px; height: 44px; position: relative; }
+.burger span { position: absolute; left: 10px; right: 10px; height: 1.5px; background: currentColor; transition: transform 0.5s var(--ease), top 0.5s var(--ease); }
+.burger span:first-child { top: 17px; }
+.burger span:last-child { top: 26px; }
+body.menu-open .burger span:first-child { top: 21px; transform: rotate(45deg); }
+body.menu-open .burger span:last-child { top: 21px; transform: rotate(-45deg); }
+
+.mnav {
+  position: fixed; inset: 0; z-index: 45;
+  background: var(--ink); color: var(--cream);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: calc(var(--header-h) + 30px) var(--gutter) 34px;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s var(--ease);
+  visibility: hidden;
+}
+body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
+.mnav__links a { display: block; font-size: clamp(56px, 16vw, 96px); padding: 4px 0; border-bottom: 1px solid var(--line-inv); }
+.mnav__foot { display: grid; gap: 6px; font-size: 14px; opacity: 0.8; }
+
+@media (max-width: 920px) {
+  .nav a:not(.btn), .hdr .open-dot { display: none; }
+  .burger { display: block; }
+  .nav .btn { height: 40px; padding: 0 16px; font-size: 11px; }
+}
+
+/* ── rideau de transition entre pages ───────── */
+.curtain {
+  position: fixed; inset: 0 0 auto; height: calc(100vh + 20px); z-index: 100;
+  pointer-events: none;
+  transform: translateY(-110%);
+}
+.curtain__body { position: absolute; inset: 0 0 20px; background: var(--ink); display: grid; place-items: center; }
+.curtain__body .sign { color: var(--cream); font-size: clamp(40px, 8vw, 110px); letter-spacing: 0.08em; opacity: 0.9; }
+.curtain .store { position: absolute; left: 0; right: 0; bottom: -24px; }
+
+/* ── révélations au scroll ──────────────── */
+.js .rv { opacity: 0; transform: translateY(28px); }
+.js .rv-img { clip-path: inset(100% 0 0 0); }
+.js .rv-img img { transform: scale(1.18); }
+.js .rv-line .w { display: inline-block; transform: translateY(105%); }
+.rv-line .ln { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+
+/* ── cadres photo ─────────────────────── */
+.frame { position: relative; overflow: hidden; background: var(--ink-3); }
+.frame img { width: 100%; height: 100%; object-fit: cover; }
+.frame--brass { box-shadow: 0 0 0 1px var(--brass), 0 0 0 7px var(--paper), 0 0 0 8px rgba(169, 133, 74, 0.55); }
+.cap {
+  margin-top: 12px;
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 12px; color: var(--muted);
+}
+.cap .serif { font-style: italic; font-size: 14px; color: inherit; }
+
+/* ── pied de page ──────────────────────── */
+.ftr { background: var(--ink); color: var(--cream); position: relative; }
+.ftr__top { padding-block: clamp(70px, 10vw, 130px) 50px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+.ftr__big { font-size: clamp(52px, 14.2vw, 232px); letter-spacing: 0.035em; padding-bottom: 26px; color: var(--cream); white-space: nowrap; text-align: center; }
+.ftr h4 { margin: 0 0 16px; color: var(--brass-hi); }
+.ftr li { list-style: none; margin: 0 0 8px; }
+.ftr ul { margin: 0; padding: 0; }
+.ftr__claim { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; max-width: 16ch; }
+.ftr__bot { border-top: 1px solid var(--line-inv); padding-block: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; opacity: 0.6; }
+@media (max-width: 860px) {
+  .ftr__top { grid-template-columns: 1fr 1fr; }
+  .ftr__top > :first-child { grid-column: 1 / -1; }
+}
+
+/* ── petit toast de démo ───────────────── */
+.toast {
+  position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 80;
+  transform: translate(-50%, 150%);
+  background: var(--ink); color: var(--cream);
+  padding: 14px 20px; font-size: 13px; max-width: calc(100vw - 32px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: transform 0.7s var(--ease);
+}
+.toast.is-on { transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .js .rv, .js .rv-line .w { opacity: 1; transform: none; }
+  .js .rv-img { clip-path: none; }
+  .js .rv-img img { transform: none; }
+}
