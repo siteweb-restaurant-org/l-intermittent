@@ -1,6 +1,7 @@
 import { gsap, ScrollTrigger, initReveals, initParallax, isReduced } from './common.js'
 import './home.css'
 import { SIGNATURES, EVENTS, euro } from './data.js'
+import { fishPlate } from './fish.js'
 
 /* ═════════ Enseigne : lettres qui s'allument ═════════ */
 const sign = document.querySelector('.hero__sign')
@@ -62,13 +63,15 @@ if (isReduced) {
   gsap.to('.hero__small', { y: -90, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
 }
 
+document.getElementById('maisonPlate').innerHTML = fishPlate('sardine', 'Pl. I')
+
 /* ═════════ Signatures : défilement horizontal ═════════ */
 const track = document.getElementById('sigTrack')
 track.innerHTML =
   SIGNATURES.map(
     (d, i) => `
   <li class="dish">
-    <div class="dish__img"><img src="/img/${d.img}.jpg" alt="${d.name}" loading="lazy"><span class="dish__no">N° ${String(i + 1).padStart(2, '0')}</span></div>
+    <div class="dish__img"><img src="/img/${d.img}.jpg" alt="${d.name}" loading="lazy"><span class="dish__no plaque">N° ${String(i + 1).padStart(2, '0')}</span></div>
     <div class="dish__row"><h3 class="dish__name">${d.name}</h3><span class="dish__price">${euro(d.price)}</span></div>
     <p class="dish__note">${d.note}</p>
   </li>`,
@@ -147,7 +150,7 @@ panels.forEach((p, i) => {
   })
 })
 // le footer suivant (soirées) reste dans la nuit
-ScrollTrigger.create({ trigger: '.soirees', start: 'top bottom', onEnter: () => gsap.set(day, { '--bg': '#121110', '--fg': '#fbf8f2' }) })
+ScrollTrigger.create({ trigger: '.soirees', start: 'top bottom', onEnter: () => gsap.set(day, { '--bg': '#0c0c0c', '--fg': '#ffffff' }) })
 
 /* ═════════ Tableau à palettes ═════════ */
 const FLAP = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·.:'

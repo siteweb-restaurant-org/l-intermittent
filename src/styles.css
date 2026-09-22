@@ -1,26 +1,27 @@
 /* ─────────────────────────────────────────────
    L'Intermittent — brasserie, Boulogne-Billancourt
-   Palette tirée du lieu : store noir, nappes blanches,
-   laiton des guéridons, rouge du bar.
+   Noir et blanc comme la façade, une pointe de bleu
+   marine pour le côté pub de bord de mer.
    ───────────────────────────────────────────── */
 
 :root {
-  --ink: #121110;
-  --ink-2: #1a1917;
-  --ink-3: #26241f;
-  --paper: #f3ede2;
-  --paper-2: #e9e1d2;
-  --cream: #fbf8f2;
-  --brass: #a9854a;
-  --brass-hi: #d6b67c;
-  --rouge: #a3302a;
-  --muted: #857e72;
-  --line: rgba(18, 17, 16, 0.14);
-  --line-inv: rgba(251, 248, 242, 0.16);
+  --ink: #0c0c0c;
+  --ink-2: #151515;
+  --ink-3: #222222;
+  --paper: #f4f4f2;
+  --paper-2: #e6e6e3;
+  --cream: #ffffff;
+  --brass: #1f3452;      /* bleu marine : accent unique */
+  --brass-hi: #c3d3e6;   /* marine clair, sur fond noir */
+  --rouge: #c62d22;
+  --muted: #76777a;
+  --line: rgba(12, 12, 12, 0.14);
+  --line-inv: rgba(255, 255, 255, 0.16);
 
-  --f-sign: 'Archivo', 'Arial Narrow', sans-serif;
-  --f-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --f-text: 'Archivo', system-ui, sans-serif;
+  --f-sign: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --f-serif: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --f-text: 'Barlow', system-ui, sans-serif;
+  --f-slab: 'Alfa Slab One', Rockwell, 'Courier New', serif;
 
   --gutter: clamp(18px, 4vw, 56px);
   --maxw: 1440px;
@@ -38,8 +39,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--f-text);
-  font-variation-settings: 'wdth' 100;
-  font-size: 16px;
+  font-size: 16.5px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -48,6 +48,13 @@ body {
 [hidden] { display: none !important; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
+em, i, cite, dfn { font-style: normal; }
+/* mots mis en avant : par le contraste, jamais par la couleur */
+.serif em { color: inherit; }
+/* mots mis en avant : par le contraste, jamais par la couleur */
+.serif em { color: inherit; }
+/* mots mis en avant : par le contraste, jamais par la couleur */
+.serif em { color: inherit; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 ::selection { background: var(--ink); color: var(--cream); }
 
@@ -73,38 +80,55 @@ body::after {
 /* ── typographie ─────────────────────────── */
 .sign {
   font-family: var(--f-sign);
-  font-variation-settings: 'wdth' 62;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   line-height: 0.86;
 }
-.serif { font-family: var(--f-serif); font-weight: 400; }
-.it { font-style: italic; }
+.serif { font-family: var(--f-serif); font-weight: 500; }
+.it { font-style: normal; }
 .kicker {
-  font-family: var(--f-text);
-  font-variation-settings: 'wdth' 88;
-  font-size: 11.5px;
+  font-family: var(--f-sign);
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.num {
-  font-family: var(--f-serif);
-  font-style: italic;
-  font-feature-settings: 'lnum';
+.num, .slab {
+  font-family: var(--f-slab);
+  font-weight: 400;
+  font-style: normal;
 }
 h1, h2, h3 { margin: 0; font-weight: inherit; }
 p { margin: 0; }
 
 .h-section {
-  font-family: var(--f-serif);
-  font-weight: 350;
-  font-size: clamp(40px, 6.4vw, 104px);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-family: var(--f-sign);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(46px, 7.4vw, 124px);
+  line-height: 0.9;
+  letter-spacing: 0;
 }
-.h-section em { font-style: italic; color: var(--brass); }
+/* mot en lettres évidées, comme une enseigne peinte */
+.h-section em, .mark {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--em-stroke, var(--ink));
+  paint-order: stroke fill;
+}
+
+/* plaque émaillée, comme les panneaux de bord de mer */
+.plaque {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink); color: var(--cream);
+  font-family: var(--f-slab); font-size: 13px; letter-spacing: 0.04em; line-height: 1;
+  padding: 7px 12px 6px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 3px rgba(255, 255, 255, 0.85);
+}
+/* marinière */
+.mariniere { height: 42px; background: repeating-linear-gradient(180deg, var(--ink) 0 5px, var(--cream) 5px 12px); }
 
 /* ── le store : rayures noir/crème + festons ── */
 .store {
@@ -146,8 +170,8 @@ p { margin: 0; }
   display: inline-flex; align-items: center; gap: 14px;
   height: 54px; padding: 0 26px;
   background: var(--bg); color: var(--fg);
-  font-variation-settings: 'wdth' 88;
-  font-size: 12.5px; font-weight: 650; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--f-sign);
+  font-size: 15px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   border-radius: 0;
   overflow: hidden;
   isolation: isolate;
@@ -177,6 +201,9 @@ p { margin: 0; }
 .link-u:hover { background-size: 0 1px; background-position: 100% 100%; }
 
 /* ── en-tête ─────────────────────────────── */
+:root { --em-stroke: var(--ink); }
+.sig, .soirees, .wines, .hero, .ftr, .resa__aside { --em-stroke: var(--cream); }
+
 .hdr {
   position: fixed; inset: 0 0 auto; z-index: 50;
   color: var(--cream);
@@ -189,17 +216,17 @@ p { margin: 0; }
 .hdr.is-solid { background: var(--ink); }
 .hdr.is-hidden { transform: translateY(-100%); }
 .brand { display: flex; flex-direction: column; line-height: 1; }
-.brand__name { font-size: 27px; letter-spacing: 0.07em; }
+.brand__name { font-size: 29px; letter-spacing: 0.05em; }
 .brand__sub {
-  margin-top: 5px;
-  font-size: 8.5px; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase;
-  font-variation-settings: 'wdth' 90;
-  opacity: 0.72;
+  margin-top: 4px;
+  font-family: var(--f-sign);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+  opacity: 0.7;
 }
 .nav { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 40px); }
 .nav a:not(.btn) {
-  font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-  font-variation-settings: 'wdth' 88;
+  font-family: var(--f-sign);
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
   position: relative; padding: 6px 0;
 }
 .nav a:not(.btn)::after {
@@ -211,8 +238,8 @@ p { margin: 0; }
 .hdr .btn--light:not(:hover) { color: var(--ink); }
 .open-dot {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  font-variation-settings: 'wdth' 88;
+  font-family: var(--f-sign);
+  font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   opacity: 0.85;
 }
 .open-dot i { width: 7px; height: 7px; border-radius: 50%; background: #6fbf73; box-shadow: 0 0 0 4px rgba(111, 191, 115, 0.2); }
@@ -264,13 +291,14 @@ body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
 /* ── cadres photo ─────────────────────── */
 .frame { position: relative; overflow: hidden; background: var(--ink-3); }
 .frame img { width: 100%; height: 100%; object-fit: cover; }
-.frame--brass { box-shadow: 0 0 0 1px var(--brass), 0 0 0 7px var(--paper), 0 0 0 8px rgba(169, 133, 74, 0.55); }
+/* cadre accroché au mur : baguette noire, passe-partout blanc */
+.frame--wall { box-shadow: 0 0 0 10px var(--cream), 0 0 0 13px var(--ink), 0 18px 34px rgba(0, 0, 0, 0.18); }
 .cap {
   margin-top: 12px;
   display: flex; justify-content: space-between; gap: 12px;
   font-size: 12px; color: var(--muted);
 }
-.cap .serif { font-style: italic; font-size: 14px; color: inherit; }
+.cap .serif { font-size: 15px; color: inherit; }
 
 /* ── pied de page ──────────────────────── */
 .ftr { background: var(--ink); color: var(--cream); position: relative; }
@@ -279,7 +307,8 @@ body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
 .ftr h4 { margin: 0 0 16px; color: var(--brass-hi); }
 .ftr li { list-style: none; margin: 0 0 8px; }
 .ftr ul { margin: 0; padding: 0; }
-.ftr__claim { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; max-width: 16ch; }
+.ftr__claim { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.1; max-width: 16ch; color: rgba(255, 255, 255, 0.6); }
+.ftr__claim em { color: var(--cream); }
 .ftr__bot { border-top: 1px solid var(--line-inv); padding-block: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; opacity: 0.6; }
 @media (max-width: 860px) {
   .ftr__top { grid-template-columns: 1fr 1fr; }
@@ -303,3 +332,22 @@ body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
   .js .rv-img { clip-path: none; }
   .js .rv-img img { transform: none; }
 }
+
+/* ── gravures encadrées (clin d'œil aux cadres de la salle) ── */
+.plate {
+  position: relative; margin: 0;
+  background: var(--cream);
+  padding: 20px 20px 14px;
+  box-shadow: 0 0 0 9px var(--cream), 0 0 0 12px var(--ink), 0 16px 30px rgba(0, 0, 0, 0.14);
+}
+.plate__art { color: var(--ink); }
+.plate__art svg { width: 100%; height: auto; display: block; }
+.plate__cap {
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+}
+.plate__cap span:first-child { font-family: var(--f-sign); font-weight: 600; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; }
+.plate__latin { font-size: 12px; color: var(--muted); }
+.plate__no { position: absolute; top: 14px; right: 16px; font-family: var(--f-slab); font-size: 11px; color: var(--muted); }
+.wall { display: grid; gap: clamp(18px, 2.4vw, 34px); }
+@media (min-width: 861px) { .wall { grid-template-columns: repeat(3, 1fr); } }
