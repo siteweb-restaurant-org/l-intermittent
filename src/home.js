@@ -122,6 +122,9 @@ const day = document.querySelector('.day')
 const clock = document.getElementById('dayClock')
 const label = document.getElementById('dayLabel')
 const sun = document.getElementById('daySun')
+const sunDay = sun.querySelector('.sun__day')
+const sunNight = sun.querySelector('.sun__night')
+const stars = document.querySelectorAll('.day__stars i')
 const panels = gsap.utils.toArray('.dp')
 let clockVal = { m: 8 * 60 }
 
@@ -140,7 +143,12 @@ panels.forEach((p, i) => {
       if (!st.isActive) return
       gsap.to(clockVal, { m: toMin(p.dataset.time), duration: isReduced ? 0 : 0.9, ease: 'power3.out', onUpdate: showClock })
       gsap.to(day, { '--bg': p.dataset.bg, '--fg': p.dataset.fg, duration: isReduced ? 0 : 1.1, ease: 'power2.out' })
-      gsap.to(sun, { left: `${(i / (panels.length - 1)) * 100}%`, xPercent: -(i / (panels.length - 1)) * 100, duration: 1, ease: 'power3.out' })
+      const prog = i / (panels.length - 1)
+      const night = prog > 0.6
+      gsap.to(sun, { left: `${prog * 100}%`, duration: 1.1, ease: 'power3.out' })
+      gsap.to(sunDay, { opacity: night ? 0 : 1, duration: 0.7, ease: 'power2.out' })
+      gsap.to(sunNight, { opacity: night ? 1 : 0, duration: 0.7, ease: 'power2.out' })
+      gsap.to(stars, { opacity: prog > 0.75 ? 0.75 : 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' })
       if (label.textContent !== p.dataset.label) {
         gsap.to(label, {
           opacity: 0, y: -8, duration: 0.25,
