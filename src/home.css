@@ -84,15 +84,9 @@ html:not(.js) .hero__sign { color: var(--cream); }
 .sec-head__rule { flex: 1; height: 1px; background: var(--line); }
 
 /* ═════════════ LA MAISON ═════════════ */
-.maison { padding-block: clamp(90px, 12vw, 170px) clamp(70px, 9vw, 120px); position: relative; }
-.maison__intro { position: relative; }
-.maison__stamp { position: absolute; right: 0; top: -14px; }
-@media (max-width: 860px) {
-  .maison__stamp { width: 86px; height: 86px; padding: 7px; right: -4px; top: -66px; }
-  .maison__stamp .stamp__big { font-size: 21px; }
-  .maison__stamp .stamp__top { font-size: 9px; letter-spacing: 0.1em; }
-  .maison__stamp .stamp__bot { font-size: 8px; }
-}
+.maison { padding-block: clamp(90px, 12vw, 170px) clamp(70px, 9vw, 120px); }
+.maison__stamp { --s: 104px; margin-right: clamp(10px, 3vw, 56px); flex-shrink: 0; }
+@media (max-width: 860px) { .maison__stamp { --s: 68px; margin-right: 4px; } }
 .maison__text {
   font-size: clamp(34px, 4.9vw, 76px);
   line-height: 1.02;

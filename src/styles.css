@@ -378,7 +378,9 @@ body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
 /* tampon encreur, un peu de travers et un peu usé */
 .stamp {
   display: inline-grid; place-items: center; gap: 2px;
-  width: 136px; height: 136px; padding: 11px;
+  --s: 108px;
+  width: var(--s); height: var(--s); padding: calc(var(--s) * 0.08);
+  font-size: calc(var(--s) / 10);
   border: 2px solid currentColor; border-radius: 50%;
   color: var(--brass);
   transform: rotate(-6deg);
@@ -387,9 +389,9 @@ body.menu-open .mnav { clip-path: inset(0 0 0 0); visibility: visible; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E") center / 160px 160px;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E") center / 160px 160px;
 }
-.stamp__top { font-family: var(--f-sign); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
-.stamp__big { font-family: var(--f-slab); font-size: 32px; line-height: 1; }
-.stamp__bot { font-family: var(--f-sign); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+.stamp__top { font-family: var(--f-sign); font-weight: 700; font-size: 0.95em; letter-spacing: 0.14em; text-transform: uppercase; }
+.stamp__big { font-family: var(--f-slab); font-size: 2.4em; line-height: 1; }
+.stamp__bot { font-family: var(--f-sign); font-size: 0.85em; letter-spacing: 0.12em; text-transform: uppercase; }
 
 /* mot écrit à la main, pour les petites annotations */
 .hand { font-family: var(--f-hand); font-size: 26px; line-height: 1.1; transform: rotate(-1deg); display: inline-block; }

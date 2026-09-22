@@ -75,11 +75,17 @@ function splitWords(el) {
         child.textContent.split(/(\s+)/).forEach((part) => {
           if (!part) return
           if (/^\s+$/.test(part)) return frag.append(' ')
-          // une ponctuation isolée reste collée au mot qui précède
-          const prev = frag.lastChild
-          if (/^[,.;:!?»)\]…]/.test(part) && prev && prev.nodeType === 1 && prev.classList.contains('ln')) {
-            prev.firstChild.textContent += part
-            return
+          // une ponctuation isolée reste collée au mot qui précède, même à travers un <em>
+          if (/^[,.;:!?»)\]…]/.test(part)) {
+            let prev = frag.lastChild
+            if (!(prev && prev.nodeType === 1 && prev.classList.contains('ln'))) {
+              const sib = child.previousSibling
+              prev = sib && sib.nodeType === 1 ? [...sib.querySelectorAll('.ln')].pop() : null
+            }
+            if (prev) {
+              prev.firstChild.textContent += part
+              return
+            }
           }
           const ln = document.createElement('span')
           ln.className = 'ln'
