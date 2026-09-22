@@ -43,7 +43,13 @@
       <div class="wrap">
         <div class="sec-head">
           <span class="kicker">01 — La maison</span>
-          <span class="sec-head__rule"></span>
+          <span class="sec-head__rule rule-hand"></span>
+        </div>
+
+        <div class="stamp maison__stamp rv" aria-hidden="true">
+          <span class="stamp__top">Brasserie</span>
+          <span class="stamp__big">2009</span>
+          <span class="stamp__bot">Boulogne</span>
         </div>
 
         <p class="maison__text serif rv-line">Depuis 2009, on sert ici une cuisine de brasserie <em>faite maison</em>, du premier café au dernier verre. Clément et son équipe vous reçoivent comme des habitués.</p>
@@ -54,14 +60,14 @@
             <figcaption class="cap"><span class="serif">La terrasse, midi</span><span>I</span></figcaption>
           </figure>
           <figure class="mc mc--b" data-speed="-0.18">
-            <div class="frame rv-img" data-delay=".15"><img src="/img/patron-bar.jpg" alt="Au comptoir du bar" loading="lazy"></div>
+            <div class="frame rv-img tilt-r" data-delay=".15"><img src="/img/patron-bar.jpg" alt="Au comptoir du bar" loading="lazy"></div>
             <figcaption class="cap"><span class="serif">Au comptoir</span><span>II</span></figcaption>
           </figure>
           <figure class="mc mc--c" data-speed="0.14">
-            <div class="frame rv-img" data-delay=".3"><img src="/img/terrasse-tablee.jpg" alt="Une grande tablée en terrasse" loading="lazy"></div>
+            <div class="frame rv-img tilt-l" data-delay=".3"><img src="/img/terrasse-tablee.jpg" alt="Une grande tablée en terrasse" loading="lazy"></div>
             <figcaption class="cap"><span class="serif">Les tablées du dimanche</span><span>III</span></figcaption>
           </figure>
-          <div class="mc mc--q rv" id="maisonPlate"></div>
+          <div class="mc mc--q rv tilt-l" id="maisonPlate"></div>
         </div>
 
         <ul class="facts">
@@ -90,6 +96,28 @@
           <span class="kicker">Glissez</span>
           <span class="sig__progress"><i id="sigBar"></i></span>
           <span class="kicker"><span id="sigCount">01</span> / 10</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── L'ARDOISE ─────────── -->
+    <section class="slate">
+      <div class="wrap slate__grid">
+        <div class="slate__txt rv">
+          <span class="kicker">Tous les matins</span>
+          <h2>Ce qui n'est<br>pas sur la carte</h2>
+          <p>Le chef écrit ses suggestions à la craie selon le marché et la marée. Elles ne durent qu'un service, alors demandez-les.</p>
+          <span class="hand slate__note">« Demandez à Clément ! »</span>
+        </div>
+        <div class="ardoise rv" data-delay=".12">
+          <p class="ardoise__title">Suggestions du jour</p>
+          <div style="margin-top:22px">
+            <p class="ardoise__line"><span>Entrée du marché</span><i></i></p>
+            <p class="ardoise__line"><span>Arrivage de la marée</span><i></i></p>
+            <p class="ardoise__line"><span>La viande du boucher</span><i></i></p>
+            <p class="ardoise__line"><span>Le dessert du chef</span><i></i></p>
+          </div>
+          <p class="ardoise__sub">et toujours les frites maison…</p>
         </div>
       </div>
     </section>

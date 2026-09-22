@@ -13,6 +13,7 @@
 .resa__asideIn { position: relative; z-index: 1; margin-top: auto; padding: 40px clamp(22px, 3.2vw, 50px) 36px; }
 .resa__title { font-size: clamp(64px, 7vw, 116px); margin: 16px 0 32px; }
 .resa__help { margin-top: 22px; font-size: 13px; opacity: 0.75; }
+.resa__hand { display: block; margin-top: 10px; color: #fff; opacity: 0.8; }
 
 .ticket {
   background: var(--cream); color: var(--ink);
@@ -58,7 +59,7 @@
 .pax { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
 .pax button {
   aspect-ratio: 1 / 1.15;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line); border-radius: var(--r-s);
   font-family: var(--f-serif); font-style: normal; font-size: clamp(26px, 2.8vw, 40px);
   transition: background 0.35s, color 0.35s, border-color 0.35s, transform 0.35s var(--ease);
   display: grid; place-items: center;
@@ -107,7 +108,7 @@
 .evt-note p { font-size: 14px; opacity: 0.8; }
 
 /* services & créneaux */
-.seg { display: inline-flex; border: 1px solid var(--line); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r-s); overflow: hidden; }
 .seg label { cursor: pointer; }
 .seg span { display: block; padding: 10px 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; transition: background 0.3s, color 0.3s; }
 .seg input:checked + span { background: var(--ink); color: var(--cream); }
@@ -115,7 +116,7 @@
 .seg--lg small { display: block; font-weight: 400; font-size: 12px; opacity: 0.6; margin-top: 2px; }
 .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin-top: 28px; }
 .slots button {
-  height: 52px; border: 1px solid var(--line);
+  height: 52px; border: 1px solid var(--line); border-radius: var(--r-s);
   font-family: var(--f-sign); font-size: 20px; font-weight: 600; letter-spacing: 0.04em;
   transition: background 0.3s, color 0.3s, border-color 0.3s;
   position: relative;
@@ -165,7 +166,7 @@
 #back[hidden] + #next { margin-left: auto; }
 
 /* ═════════ Confirmation ═════════ */
-.done__card { background: var(--cream); box-shadow: 0 40px 90px rgba(12, 12, 12, 0.14); max-width: 640px; }
+.done__card { background: var(--cream); border-radius: 0 0 var(--r) var(--r); overflow: hidden; box-shadow: 0 40px 90px rgba(12, 12, 12, 0.14); max-width: 640px; }
 .done__card .store { margin-bottom: -14px; }
 .done__body { padding: 50px clamp(22px, 4vw, 50px) 40px; }
 .done__title { font-size: clamp(36px, 3.8vw, 54px); line-height: 1.04; letter-spacing: -0.02em; margin: 14px 0 34px; font-weight: 350; }
